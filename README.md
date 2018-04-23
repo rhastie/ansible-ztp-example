@@ -1,4 +1,4 @@
-# Ansible to configure and update ZTP server
+# Ansible to configure and update a ZTP server for use with Mellanox Oynx network devices
 
 Sample project using Ansible to setup and manage a ZTP server for use with Mellanox Oynx-based network switches.
 
