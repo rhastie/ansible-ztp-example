@@ -1,0 +1,9 @@
+---
+### Setup Local directory structure to store files locally
+- name: Init ZTP directory strucutre to store local files
+  hosts: ansible-servers
+# Set so playbook can only be run on the Ansible server - ie. ansible-servers from hosts.ini file
+  connection: local
+  gather_facts: no
+  roles:
+    - {role: ztp-init}

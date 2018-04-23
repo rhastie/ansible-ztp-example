@@ -1,0 +1,7 @@
+- name: Initiate ZTP Setup with requested packages (apt supports only)
+  hosts: ztp-servers
+# Set so that playbook only runs against ZTP Server
+  connection: ssh
+  gather_facts: no
+  roles:
+    - {role: ztp-install-packages, become: yes}

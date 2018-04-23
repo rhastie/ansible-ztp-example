@@ -1,0 +1,71 @@
+{# This config is common to all Mellanox Oynx device types. For it to be generated the 'common' role must be included in the platform specific play file. #}
+##
+## Running-config temporary prefix mode setting
+##
+no cli default prefix-modes enable
+
+##
+## Network interface configuration
+##
+no interface mgmt0 dhcp
+   interface mgmt0 ip address {{ mlnx_oynx_host }} /{{ global.mgmt_sub_mask }}
+no interface mgmt1 dhcp
+   interface mgmt1 dhcp hostname
+   interface mgmt1 display
+   interface mgmt1 duplex auto
+   interface mgmt1 mtu 1500
+no interface mgmt1 shutdown
+   interface mgmt1 speed auto
+no interface mgmt1 zeroconf
+
+##
+## Network interface IPv6 configuration
+##
+no interface mgmt1 ipv6 address autoconfig
+   interface mgmt1 ipv6 address autoconfig default
+no interface mgmt1 ipv6 address autoconfig privacy
+no interface mgmt1 ipv6 dhcp client enable
+   interface mgmt1 ipv6 enable
+
+##
+## Other IP configuration
+##
+   interface mgmt1 ip arp timeout 60
+{% for name_server in global.name_servers %}
+   ip name-server {{ name_server }}
+{% endfor %}
+   hostname {{ inventory_hostname }}
+   ip route vrf default 0.0.0.0/0 {{ gateway }}
+
+##
+## AAA remote server configuration
+##
+# ldap bind-password ********
+# radius-server key ********
+# tacacs-server key ********
+
+##
+## Network management configuration
+##
+# web proxy auth basic password ********
+   banner login "{{ global.login_message }}"
+   clock timezone {{ global.time_zone }}
+{% for ntp_server in global.ntp_servers %}
+no ntp server {{ ntp_server }} disable
+   ntp server {{ ntp_server }} keyID 0
+no ntp server {{ ntp_server }} trusted-enable
+   ntp server {{ ntp_server }} version 4
+{% endfor %}
+
+##
+## X.509 certificates configuration
+##
+#
+# Certificate name system-self-signed, ID a17081d427c6a933fa4f21550dd68231b9393fef
+# (public-cert config omitted since private-key config is hidden)
+
+##
+## Persistent prefix mode setting
+##
+cli default prefix-modes enable
+

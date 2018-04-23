@@ -1,0 +1,36 @@
+---
+- name: Print build path version
+  debug:
+    msg: "Build directory {{ build_dir }}"
+
+- name: Check if path exists
+  stat: path={{ build_dir }}
+  register: check_path
+
+- name: It exists
+  debug: msg='The path exists... Will clean up structure and delete it'
+  when: check_path.stat.exists and check_path.stat.isdir
+
+- name: Remove build_dir
+  file: path={{ build_dir }} state=absent
+  when: check_path.stat.exists and check_path.stat.isdir
+
+- name: It doesn't exist
+  debug: msg="The path doesn't exist... No need to clean up structure"
+  when: check_path.stat.exists == false
+
+- name: create ztp directory
+  file: path={{ build_dir }} state=directory
+
+- name: build_dir created
+  debug: msg='build_dir has been initiated correctly'
+  when: check_path.stat.exists
+
+- name: create ztp directory for configlet
+  file: path={{ build_dir }}/configlet/ state=directory recurse=yes
+
+- name: create ztp directory for Mellanox Oynx image files
+  file: path={{ build_dir }}/{{ztp.path.local_images}} state=directory recurse=yes
+
+- name: create ztp directory for Mellanox Oynx container files
+  file: path={{ build_dir }}/{{ztp.path.local_containers}} state=directory recurse=yes

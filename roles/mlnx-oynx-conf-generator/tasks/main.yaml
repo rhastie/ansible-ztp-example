@@ -1,0 +1,5 @@
+---
+- name: Building common configuration for Mellanox Oynx devices
+  template: >
+    src=common.conf.mlnx-oynx.default
+    dest={{playbook_dir}}{{ ztp.path.local_conf }}/{{ inventory_hostname }}.conf

@@ -1,0 +1,33 @@
+# The ddns-updates-style parameter controls whether or not the server will
+# attempt to do a DNS update when a lease is confirmed. We default to the
+# behavior of the version 2 packages ('none', since DHCP v2 didn't
+# have support for DDNS.)
+ddns-update-style none;
+
+# option definitions common to all supported networks...
+{% if ztp.setup.dhcp.domain_name is defined %}option domain-name "{{ztp.setup.dhcp.domain_name}}";
+{% endif %}
+
+# Default Lease time
+default-lease-time 600;
+max-lease-time 7200;
+
+# If this DHCP server is the official DHCP server for the local
+# network, the authoritative directive should be uncommented.
+authoritative;
+
+# Use this to send dhcp log messages to a different log file (you also
+# have to hack syslog.conf to complete the redirection).
+log-facility local7;
+
+# Subnet definition
+{% for item in ztp.setup.dhcp.ranges -%}
+subnet {{ item.range}} netmask {{item.netmask}} {
+  range dynamic-bootp {{item.pool_low}} {{item.pool_high}};
+  option routers {{item.gateway}};
+  option domain-name-servers {{item.dns}};
+}
+{% endfor %}
+
+# ZTP Configuration
+

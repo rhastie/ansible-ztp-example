@@ -1,0 +1,31 @@
+- name: Configure Switch Interfaces to 10G
+  onyx_interface:
+      aggregate:
+        - name: Eth1/1
+        - name: Eth1/2
+        - name: Eth1/3
+        - name: Eth1/4
+        - name: Eth1/5
+        - name: Eth1/6
+        - name: Eth1/7
+        - name: Eth1/8
+        - name: Eth1/9
+        - name: Eth1/10
+        - name: Eth1/11
+        - name: Eth1/11
+        - name: Eth1/12
+        - name: Eth1/13
+        - name: Eth1/14
+        - name: Eth1/15
+        - name: Eth1/16
+        - name: Eth1/17
+        - name: Eth1/18
+      description: Module-Test-Interface
+      speed: 10G
+
+- name: Configure a L3 Interface IP address for VLAN
+
+  onyx_l3_interface:
+    name: "Vlan 1"
+    ipv4: 192.168.39.1/24
+

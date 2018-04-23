@@ -1,0 +1,29 @@
+---
+  ztp:
+    setup:
+      dhcp:
+        domain_name: lab.test.net
+        ranges:
+          - range: 192.168.6.0
+            netmask: 255.255.255.0
+            pool_low: 192.168.6.100
+            pool_high: 192.168.6.150
+            gateway: 192.168.6.1
+            dns: "8.8.8.8, 8.8.4.4"
+
+      ftp:
+        home_dir: "/var/ftp/"
+
+    configuration:
+      method: ftp
+      server:
+        ftp: 192.168.6.11
+
+    path:
+      ftp_conf: "/conf"
+      ftp_root: "/var/ftp"
+      ftp_images: "/images"
+      ftp_containers: "/containers"
+      local_conf: "/conf"
+      local_images: "/images"
+      local_containers: "/containers"

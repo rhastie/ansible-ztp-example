@@ -1,0 +1,13 @@
+global:
+    login_message: This is the property of Example Corp. Do not login without express permission.
+    time_zone: Europe Western London
+    mgmt_sub_mask: 24
+    name_servers:
+    - 8.8.8.8
+    - 8.8.4.4
+    ntp_servers:
+    - 0.pool.ntp.org
+    - 1.pool.ntp.org
+
+
+

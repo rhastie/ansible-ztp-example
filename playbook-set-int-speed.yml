@@ -1,0 +1,13 @@
+---
+  ### Set all SFP interfaces on SN2010 to 10G
+  - name: Set all SFP interface on SN2010 to 10G
+    hosts: SN2010-0
+    gather_facts: no
+    connection: network_cli
+    become: yes
+    become_method: enable
+    remote_user: admin
+    vars:
+      ansible_network_os: onyx
+    roles:
+      - {role: set-link-speed-example}

@@ -1,0 +1,7 @@
+host {{inventory_hostname}} {
+	hardware ethernet {{mac_address}};
+	fixed-address {{mlnx_oynx_host}};
+	option tftp-server-name "ftp://{{ztp.configuration.server.ftp}}{{ztp.path.ftp_images}}/,ftp://{{ztp.configuration.server.ftp}}{{ztp.path.ftp_conf}}/,ftp://{{ztp.configuration.server.ftp}}{{ztp.path.ftp_containers}}/";
+        option bootfile-name "{{image_version}},{{inventory_hostname}}.conf,{{container}}";
+}
+

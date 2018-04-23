@@ -1,0 +1,23 @@
+---
+- name: Push Mellanox Oynx configuration to the FTP server from {{ztp.path.local_conf}}
+  copy: src={{ item }} dest={{ztp.path.ftp_root}}/{{ztp.path.ftp_conf}}/{{ item | basename  }}
+  with_fileglob:
+        - "{{ztp.path.local_conf | basename}}/*.conf"
+
+- name: Push Mellanox image files to the FTP server from {{ build_dir }}{{ztp.path.local_images}}
+  copy: src={{ item }} dest={{ztp.path.ftp_root}}/{{ztp.path.ftp_images}}/{{ item | basename  }}
+  with_fileglob:
+        - "{{build_dir}}{{ztp.path.local_images}}/*"
+
+- name: Push Mellanox conatiner files to the FTP server from {{ build_dir }}{{ztp.path.local_containers}}
+  copy: src={{ item }} dest={{ztp.path.ftp_root}}/{{ztp.path.ftp_containers}}/{{ item | basename  }}
+  with_fileglob:
+        - "{{build_dir}}{{ztp.path.local_containers}}/*"
+
+- name: Copy dhcp content to dhcp-server
+  template: src={{ build_dir }}/dhcpd.conf dest=/etc/dhcp/dhcpd.conf backup=yes
+  register: dhcp_config
+
+- name: Restart dhcp service to apply changes
+  service: name=isc-dhcp-server state=restarted
+  when: dhcp_config.changed

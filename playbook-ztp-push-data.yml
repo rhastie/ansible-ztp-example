@@ -1,0 +1,10 @@
+---
+  ### Send files to ZTP servers
+  - name: Send ZTP configurations & softwares to server
+    hosts: ztp-servers
+    connection: ssh
+    gather_facts: no
+    vars_files:
+      - "group_vars/all/ztp-variables.yaml"
+    roles:
+      - {role: ztp-push-dhcp, become: yes}

@@ -1,0 +1,12 @@
+---
+### Create configuration files for Mellanox Oynx devices on local basis
+### Must be executed only if local structure has been created with playbook: playbook-ztp-init.yml
+- name: Populate local devices configuration
+  hosts: devices
+  connection: local
+  gather_facts: no
+  vars_files:
+      - "group_vars/all/ztp-variables.yaml"
+      - "group_vars/mlnx-oynx/mlnx-oynx-conf-generator.yaml"
+  roles:
+    - {role: mlnx-oynx-conf-generator}
