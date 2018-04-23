@@ -14,7 +14,7 @@ sn2000series
 #########################################
 [sn2000series]
 SN2010-0	ansible_host=192.168.6.90	mlnx_oynx_host=192.168.6.90	mac_address=50:6B:4B:16:62:94	gateway=192.168.6.1	container="emset.img.gz"
-SN2100-1        mlnx_oynx_host=192.168.6.81     mac_address=50:6B:4B:16:FF:FF   gateway=192.168.6.1     container=""
+SN2100-1        ansible_host=192.168.6.81	mlnx_oynx_host=192.168.6.81     mac_address=50:6B:4B:16:FF:FF   gateway=192.168.6.1     container=""
 
 [sn2000series:vars]
 image_version= "image-X86_64-3.6.6106.img"
