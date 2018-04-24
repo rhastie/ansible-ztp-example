@@ -7,7 +7,7 @@ In this project you'll find:
 - (2) Severals **ansible roles** packaged and documented into [Ansible roles](roles) to configure DHCP server and to deploy configuration files on all remote ZTP servers (FTP).
 - (3) **[Examples of ZTP configurations](conf/ztp)** files.
 - (4) **Playbook to play with ZTP roles** and update ZTP in a more complex project.
-- (5) A simple example playbook to configures a Mellanox Oynx-based network switch post-ZTP boot up.
+- (5) A simple example playbook to configure a Mellanox Oynx-based network switch post-ZTP boot up.
 
 
 
