@@ -36,5 +36,7 @@ option option-150 code 150 = ip-address;
 subnet {{ item.range}} netmask {{item.netmask}} {
   range dynamic-bootp {{item.pool_low}} {{item.pool_high}};
   option routers {{item.gateway}};
+  option domain-name-servers {{item.dns}};
 }
 {% endfor %}
+
